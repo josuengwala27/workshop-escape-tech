@@ -1,0 +1,310 @@
+.biostat-role {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.role-instructions {
+  background: rgba(33, 150, 243, 0.1);
+  border-left: 4px solid var(--primary-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.role-instructions h2 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.warning-text {
+  background: rgba(255, 152, 0, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--warning-color);
+  margin-top: 1rem;
+}
+
+.lots-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lot-tab {
+  flex: 1;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-light);
+  font-weight: 600;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.lot-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lot-tab.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.lot-tab.ok {
+  border-color: var(--success-color);
+}
+
+.lot-tab.rejected {
+  border-color: var(--danger-color);
+}
+
+.lot-status-icon {
+  margin-left: 0.5rem;
+}
+
+.chart-container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+}
+
+.chart-container h3 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.analysis-helper {
+  background: rgba(255, 152, 0, 0.1);
+  border-left: 4px solid var(--warning-color);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+}
+
+.analysis-helper p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.helper-rule {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.usable-text {
+  color: var(--success-color);
+}
+
+.reject-text {
+  color: var(--danger-color);
+}
+
+.btn-analyze {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.btn-analyze:hover:not(:disabled) {
+  background: #1976D2;
+}
+
+.analysis-result {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.analysis-result.ok {
+  background: rgba(76, 175, 80, 0.1);
+  border: 2px solid var(--success-color);
+}
+
+.analysis-result.rejected {
+  background: rgba(244, 67, 54, 0.1);
+  border: 2px solid var(--danger-color);
+}
+
+.analysis-result h4 {
+  margin-bottom: 0.5rem;
+}
+
+.verdict {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.submit-section {
+  text-align: center;
+}
+
+.btn-submit {
+  padding: 1.2rem 3rem;
+  background: var(--success-color);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.completion-message {
+  background: rgba(76, 175, 80, 0.1);
+  border: 2px solid var(--success-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.completion-message h3 {
+  color: var(--success-color);
+}
+
+.decision-modal {
+  margin-top: 1.5rem;
+  padding: 2rem;
+  background: rgba(33, 150, 243, 0.1);
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  animation: slideIn 0.3s ease;
+}
+
+.decision-modal h4 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal-instruction {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.decision-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-decision {
+  padding: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-decision.usable {
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid var(--success-color);
+  color: var(--success-color);
+}
+
+.btn-decision.usable:hover {
+  background: rgba(76, 175, 80, 0.3);
+  transform: scale(1.05);
+}
+
+.btn-decision.reject {
+  background: rgba(244, 67, 54, 0.2);
+  border: 2px solid var(--danger-color);
+  color: var(--danger-color);
+}
+
+.btn-decision.reject:hover {
+  background: rgba(244, 67, 54, 0.3);
+  transform: scale(1.05);
+}
+
+.btn-cancel {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.lot-selection {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.lot-select-btn {
+  padding: 1.5rem 2rem;
+  background: rgba(76, 175, 80, 0.1);
+  border: 2px solid rgba(76, 175, 80, 0.5);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.lot-select-btn:hover {
+  background: rgba(76, 175, 80, 0.2);
+  transform: translateY(-3px);
+}
+
+.lot-select-btn.selected {
+  background: rgba(76, 175, 80, 0.3);
+  border-color: var(--success-color);
+  border-width: 3px;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
+}
+
+.lot-icon {
+  font-size: 2.5rem;
+}
+
+.lot-label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--success-color);
+}
+
+.check-icon {
+  font-size: 1.5rem;
+  color: var(--success-color);
+  animation: checkPop 0.3s ease;
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.warning-no-lots {
+  text-align: center;
+  color: var(--warning-color);
+  font-weight: 600;
+  padding: 2rem;
+}
+

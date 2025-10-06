@@ -1,0 +1,78 @@
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+}
+
+.timer-icon {
+  font-size: 2rem;
+}
+
+.timer-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+.timer-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: var(--text-light);
+}
+
+.timer-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.timer-bar-fill {
+  height: 100%;
+  background: var(--primary-color);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.timer.urgent {
+  background: rgba(255, 152, 0, 0.2);
+  border: 2px solid var(--warning-color);
+}
+
+.timer.urgent .timer-value {
+  color: var(--warning-color);
+}
+
+.timer.urgent .timer-bar-fill {
+  background: var(--warning-color);
+}
+
+.timer.critical {
+  background: rgba(244, 67, 54, 0.2);
+  border: 2px solid var(--danger-color);
+  animation: timerPulse 1s infinite;
+}
+
+.timer.critical .timer-value {
+  color: var(--danger-color);
+}
+
+.timer.critical .timer-bar-fill {
+  background: var(--danger-color);
+}
+
+@keyframes timerPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.8);
+  }
+}
+

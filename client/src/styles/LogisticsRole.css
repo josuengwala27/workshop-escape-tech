@@ -1,0 +1,211 @@
+.logistics-role {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.lot-info {
+  background: rgba(76, 175, 80, 0.1);
+  border: 2px solid var(--success-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.lot-info h3 {
+  color: var(--success-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.lot-status {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.logistics-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.route-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.info-value.location {
+  color: var(--primary-color);
+}
+
+.info-value.duration {
+  color: var(--success-color);
+}
+
+.info-value.duration.over-limit {
+  color: var(--danger-color);
+}
+
+.info-value.status.ok {
+  color: var(--success-color);
+}
+
+.info-value.status.danger {
+  color: var(--danger-color);
+}
+
+.route-progress {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  min-height: 120px;
+}
+
+.empty-route {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem;
+}
+
+.route-steps {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.route-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(33, 150, 243, 0.2);
+  border-radius: 8px;
+  min-width: 100px;
+}
+
+.step-icon {
+  font-size: 2rem;
+}
+
+.step-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.route-arrow {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.route-duration {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.available-routes h3 {
+  margin-bottom: 1rem;
+}
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.route-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.route-card:hover:not(:disabled) {
+  background: rgba(33, 150, 243, 0.1);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.route-card.over-limit {
+  border-color: var(--danger-color);
+  opacity: 0.6;
+}
+
+.route-destination {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.destination-icon {
+  font-size: 1.5rem;
+}
+
+.route-card .route-duration {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.route-warning {
+  color: var(--danger-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.logistics-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-reset {
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  font-weight: 600;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-reset:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
