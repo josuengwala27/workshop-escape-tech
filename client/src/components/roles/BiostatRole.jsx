@@ -7,16 +7,17 @@ function BiostatRole({ data, onComplete, isCompleted, roomCode }) {
   const [analysis, setAnalysis] = useState({});
 
   // Partager les actions en temps réel
-  const shareAction = (action, actionData) => {
+  useEffect(() => {
     const socket = window.socket;
     if (socket && roomCode) {
-      socket.emit('shareAction', { roomCode, action, data: actionData });
+      console.log('🔴 Biostat partage:', { selectedLot, analysis });
+      socket.emit('shareAction', { 
+        roomCode, 
+        action: 'updateBiostat', 
+        data: { selectedLot, analysis }
+      });
     }
-  };
-
-  useEffect(() => {
-    shareAction('selectLot', { selectedLot, analysis });
-  }, [selectedLot, analysis]);
+  }, [selectedLot, analysis, roomCode]);
 
   const [showDecisionModal, setShowDecisionModal] = useState(null);
 

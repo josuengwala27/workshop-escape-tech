@@ -191,14 +191,22 @@ io.on('connection', (socket) => {
   // Partage d'actions en temps réel (pour observation)
   socket.on('shareAction', ({ roomCode, action, data }) => {
     const game = games.get(roomCode);
-    if (!game) return;
+    if (!game) {
+      console.log('❌ Game not found for roomCode:', roomCode);
+      return;
+    }
+    
+    const playerRole = game.players[socket.id]?.role;
+    console.log(`🔴 Serveur reçoit action de ${playerRole}:`, action, data);
     
     // Broadcaster l'action à tous les autres joueurs de la room
     socket.to(roomCode).emit('playerAction', { 
-      role: game.players[socket.id]?.role,
+      role: playerRole,
       action, 
       data 
     });
+    
+    console.log(`📡 Serveur broadcast à room ${roomCode}`);
   });
 
   // Soumission d'un résultat

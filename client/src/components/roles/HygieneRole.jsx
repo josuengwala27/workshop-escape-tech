@@ -7,16 +7,17 @@ function HygieneRole({ data, onComplete, isCompleted, roomCode }) {
   const [errors, setErrors] = useState(0);
 
   // Partager les actions en temps réel
-  const shareAction = (action, actionData) => {
+  useEffect(() => {
     const socket = window.socket;
     if (socket && roomCode) {
-      socket.emit('shareAction', { roomCode, action, data: actionData });
+      console.log('🔴 Hygiène partage:', { orderedSteps: orderedSteps.map(s => s.id) });
+      socket.emit('shareAction', { 
+        roomCode, 
+        action: 'updateHygiene', 
+        data: { orderedSteps: orderedSteps.map(s => s.id) }
+      });
     }
-  };
-
-  useEffect(() => {
-    shareAction('updateSteps', { orderedSteps: orderedSteps.map(s => s.id) });
-  }, [orderedSteps]);
+  }, [orderedSteps, roomCode]);
 
   const handleSelectStep = (step) => {
     setOrderedSteps([...orderedSteps, step]);

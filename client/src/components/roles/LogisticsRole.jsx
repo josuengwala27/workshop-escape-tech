@@ -7,16 +7,17 @@ function LogisticsRole({ data, onComplete, isCompleted, selectedLot, roomCode })
   const [totalDuration, setTotalDuration] = useState(0);
 
   // Partager les actions en temps réel
-  const shareAction = (action, actionData) => {
+  useEffect(() => {
     const socket = window.socket;
     if (socket && roomCode) {
-      socket.emit('shareAction', { roomCode, action, data: actionData });
+      console.log('🔴 Logistique partage:', { selectedRoute, currentLocation, totalDuration });
+      socket.emit('shareAction', { 
+        roomCode, 
+        action: 'updateLogistics', 
+        data: { selectedRoute, currentLocation, totalDuration }
+      });
     }
-  };
-
-  useEffect(() => {
-    shareAction('updateRoute', { selectedRoute, currentLocation, totalDuration });
-  }, [selectedRoute, currentLocation, totalDuration]);
+  }, [selectedRoute, currentLocation, totalDuration, roomCode]);
 
   const getAvailableRoutes = () => {
     return data.routes.filter(route => route.from === currentLocation);

@@ -11,14 +11,22 @@ function ObserverLive({ currentTurn, gameData }) {
     totalDuration: 0,
     orderedSteps: []
   });
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
 
   useEffect(() => {
     const socket = window.socket;
     if (!socket) return;
 
     const handlePlayerAction = ({ role, action, data }) => {
+      console.log('👀 Observer reçoit:', { role, action, data, currentTurn });
       if (role === currentTurn) {
-        setObservedData(prev => ({ ...prev, ...data }));
+        console.log('✅ Mise à jour de observedData:', data);
+        setObservedData(prev => {
+          const newData = { ...prev, ...data };
+          console.log('📊 Nouveau state:', newData);
+          return newData;
+        });
+        setLastUpdate(Date.now());
       }
     };
 
@@ -48,6 +56,9 @@ function ObserverLive({ currentTurn, gameData }) {
           <span className="role-emoji">{roleInfo.emoji}</span>
           Vue en temps réel : {roleInfo.name}
         </h3>
+        <span className="update-indicator" key={lastUpdate}>
+          📡 Données synchronisées
+        </span>
       </div>
 
       <div className="observer-content">
