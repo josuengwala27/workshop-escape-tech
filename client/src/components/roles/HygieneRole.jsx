@@ -6,7 +6,20 @@ function HygieneRole({ data, onComplete, isCompleted, roomCode }) {
   const [availableSteps, setAvailableSteps] = useState([...data.steps]);
   const [errors, setErrors] = useState(0);
 
-  // Partager les actions en temps réel
+  // Partager l'état initial au montage
+  useEffect(() => {
+    const socket = window.socket;
+    if (socket && roomCode) {
+      console.log('🎬 Hygiène envoie état initial');
+      socket.emit('shareAction', { 
+        roomCode, 
+        action: 'updateHygiene', 
+        data: { orderedSteps: [] }
+      });
+    }
+  }, [roomCode]); // Une seule fois au montage
+
+  // Partager les changements en temps réel
   useEffect(() => {
     const socket = window.socket;
     if (socket && roomCode) {

@@ -161,6 +161,14 @@ function ObserverLive({ currentTurn, gameData }) {
       <div className="observer-tip">
         💡 <strong>Conseil :</strong> Préparez-vous pour votre tour !
       </div>
+
+      {/* Mode DEBUG - Affichage des données reçues */}
+      <details className="debug-panel">
+        <summary>🐛 Mode DEBUG (cliquez pour voir les données)</summary>
+        <pre className="debug-content">
+          {JSON.stringify(observedData, null, 2)}
+        </pre>
+      </details>
     </div>
   );
 }

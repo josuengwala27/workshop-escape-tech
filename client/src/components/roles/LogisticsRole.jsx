@@ -6,7 +6,20 @@ function LogisticsRole({ data, onComplete, isCompleted, selectedLot, roomCode })
   const [currentLocation, setCurrentLocation] = useState('depot');
   const [totalDuration, setTotalDuration] = useState(0);
 
-  // Partager les actions en temps réel
+  // Partager l'état initial au montage
+  useEffect(() => {
+    const socket = window.socket;
+    if (socket && roomCode) {
+      console.log('🎬 Logistique envoie état initial');
+      socket.emit('shareAction', { 
+        roomCode, 
+        action: 'updateLogistics', 
+        data: { selectedRoute: [], currentLocation: 'depot', totalDuration: 0 }
+      });
+    }
+  }, [roomCode]); // Une seule fois au montage
+
+  // Partager les changements en temps réel
   useEffect(() => {
     const socket = window.socket;
     if (socket && roomCode) {

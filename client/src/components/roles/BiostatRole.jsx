@@ -6,7 +6,20 @@ function BiostatRole({ data, onComplete, isCompleted, roomCode }) {
   const [selectedLot, setSelectedLot] = useState(0);
   const [analysis, setAnalysis] = useState({});
 
-  // Partager les actions en temps réel
+  // Partager l'état initial au montage
+  useEffect(() => {
+    const socket = window.socket;
+    if (socket && roomCode) {
+      console.log('🎬 Biostat envoie état initial:', { selectedLot: 0, analysis: {} });
+      socket.emit('shareAction', { 
+        roomCode, 
+        action: 'updateBiostat', 
+        data: { selectedLot: 0, analysis: {} }
+      });
+    }
+  }, [roomCode]); // Une seule fois au montage
+
+  // Partager les changements en temps réel
   useEffect(() => {
     const socket = window.socket;
     if (socket && roomCode) {
