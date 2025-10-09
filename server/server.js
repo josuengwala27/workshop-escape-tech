@@ -105,7 +105,8 @@ function createGame(roomCode) {
     status: 'waiting', // waiting, playing, ended
     currentTurn: 'biostat', // biostat -> logistics -> hygiene
     turnOrder: ['biostat', 'logistics', 'hygiene'],
-    completedTurns: []
+    completedTurns: [],
+    timerInterval: null // Stocker la référence de l'interval
   };
 }
 
@@ -163,6 +164,12 @@ io.on('connection', (socket) => {
     // Démarrer si tous les joueurs sont prêts
     const allReady = Object.values(game.players).every(p => p.ready);
     if (allReady && Object.keys(game.players).length === 3) {
+      // Nettoyer l'ancien timer s'il existe
+      if (game.timerInterval) {
+        clearInterval(game.timerInterval);
+        console.log('🧹 Ancien timer nettoyé');
+      }
+
       game.status = 'playing';
       game.startTime = Date.now();
       game.currentTurn = 'biostat'; // Commence avec Biostat'
@@ -172,15 +179,19 @@ io.on('connection', (socket) => {
         currentTurn: game.currentTurn
       });
       
+      console.log(`⏱️ Timer démarré pour la partie ${roomCode}`);
+      
       // Timer côté serveur
-      const interval = setInterval(() => {
+      game.timerInterval = setInterval(() => {
         const elapsed = Math.floor((Date.now() - game.startTime) / 1000);
         const remaining = game.duration - elapsed;
         
         if (remaining <= 0) {
-          clearInterval(interval);
+          clearInterval(game.timerInterval);
+          game.timerInterval = null;
           game.status = 'ended';
           io.to(roomCode).emit('gameEnded', { reason: 'timeout', results: game.results });
+          console.log(`⏰ Timer terminé pour la partie ${roomCode}`);
         } else {
           io.to(roomCode).emit('timerUpdate', { remaining });
         }
@@ -288,7 +299,13 @@ io.on('connection', (socket) => {
         
         // Supprimer la partie si vide
         if (Object.keys(game.players).length === 0) {
+          // Nettoyer le timer avant de supprimer la partie
+          if (game.timerInterval) {
+            clearInterval(game.timerInterval);
+            console.log(`🧹 Timer nettoyé pour la partie ${roomCode}`);
+          }
           games.delete(roomCode);
+          console.log(`🗑️ Partie ${roomCode} supprimée (vide)`);
         }
       }
     }
