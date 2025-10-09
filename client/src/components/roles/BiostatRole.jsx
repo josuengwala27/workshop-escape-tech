@@ -99,7 +99,7 @@ function BiostatRole({ data, onComplete, isCompleted, roomCode }) {
           <p>📝 <strong>Aide :</strong> Comptez le nombre de points au-dessus de la ligne rouge (8°C)</p>
           <p className="helper-rule">
             ✅ Si ≤ 8 minutes au-dessus de 8°C → <strong className="usable-text">UTILISABLE</strong><br/>
-            ❌ Si > 8 minutes au-dessus de 8°C → <strong className="reject-text">À REJETER</strong>
+            ❌ Si {'>'} 8 minutes au-dessus de 8°C → <strong className="reject-text">À REJETER</strong>
           </p>
         </div>
         
@@ -150,7 +150,7 @@ function BiostatRole({ data, onComplete, isCompleted, roomCode }) {
             <h4>🔍 Votre décision pour le Lot {data.lots[selectedLot].name}</h4>
             <p className="modal-instruction">
               Comptez les minutes où la température dépasse 8°C.<br/>
-              <strong>Règle :</strong> Si ≤ 8 minutes → Utilisable | Si > 8 minutes → À rejeter
+              <strong>Règle :</strong> Si ≤ 8 minutes → Utilisable | Si {'>'} 8 minutes → À rejeter
             </p>
             <div className="decision-buttons">
               <button 
