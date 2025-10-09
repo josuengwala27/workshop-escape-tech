@@ -142,6 +142,23 @@
   margin-top: 1rem;
 }
 
+.btn-modify {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+  background: rgba(255, 152, 0, 0.2);
+  border: 2px solid var(--warning-color);
+  color: var(--warning-color);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-modify:hover:not(:disabled) {
+  background: rgba(255, 152, 0, 0.3);
+  transform: translateY(-2px);
+}
+
 .submit-section {
   text-align: center;
 }

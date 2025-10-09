@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/LogisticsRole.css';
 
-function LogisticsRole({ data, onComplete, isCompleted, selectedLot }) {
+function LogisticsRole({ data, onComplete, isCompleted, selectedLot, roomCode }) {
   const [selectedRoute, setSelectedRoute] = useState([]);
   const [currentLocation, setCurrentLocation] = useState('depot');
   const [totalDuration, setTotalDuration] = useState(0);
+
+  // Partager les actions en temps réel
+  const shareAction = (action, actionData) => {
+    const socket = window.socket;
+    if (socket && roomCode) {
+      socket.emit('shareAction', { roomCode, action, data: actionData });
+    }
+  };
+
+  useEffect(() => {
+    shareAction('updateRoute', { selectedRoute, currentLocation, totalDuration });
+  }, [selectedRoute, currentLocation, totalDuration]);
 
   const getAvailableRoutes = () => {
     return data.routes.filter(route => route.from === currentLocation);

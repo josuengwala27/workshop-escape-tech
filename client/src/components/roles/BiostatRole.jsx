@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import '../../styles/BiostatRole.css';
 
-function BiostatRole({ data, onComplete, isCompleted }) {
+function BiostatRole({ data, onComplete, isCompleted, roomCode }) {
   const [selectedLot, setSelectedLot] = useState(0);
   const [analysis, setAnalysis] = useState({});
+
+  // Partager les actions en temps réel
+  const shareAction = (action, actionData) => {
+    const socket = window.socket;
+    if (socket && roomCode) {
+      socket.emit('shareAction', { roomCode, action, data: actionData });
+    }
+  };
+
+  useEffect(() => {
+    shareAction('selectLot', { selectedLot, analysis });
+  }, [selectedLot, analysis]);
 
   const [showDecisionModal, setShowDecisionModal] = useState(null);
 
@@ -172,6 +184,17 @@ function BiostatRole({ data, onComplete, isCompleted }) {
             <p className="verdict">
               {analysis[data.lots[selectedLot].name].status}
             </p>
+            <button
+              onClick={() => {
+                const newAnalysis = { ...analysis };
+                delete newAnalysis[data.lots[selectedLot].name];
+                setAnalysis(newAnalysis);
+              }}
+              className="btn-modify"
+              disabled={isCompleted}
+            >
+              🔄 Modifier cette décision
+            </button>
           </div>
         )}
       </div>

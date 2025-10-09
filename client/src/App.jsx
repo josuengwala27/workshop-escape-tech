@@ -114,6 +114,7 @@ function App() {
           timeRemaining={timeRemaining}
           currentTurn={currentTurn}
           completedTurns={completedTurns}
+          roomCode={roomCode}
           onSubmitResult={handleSubmitResult}
           onSubmitFinalCode={handleSubmitFinalCode}
         />

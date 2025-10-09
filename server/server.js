@@ -188,6 +188,19 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Partage d'actions en temps réel (pour observation)
+  socket.on('shareAction', ({ roomCode, action, data }) => {
+    const game = games.get(roomCode);
+    if (!game) return;
+    
+    // Broadcaster l'action à tous les autres joueurs de la room
+    socket.to(roomCode).emit('playerAction', { 
+      role: game.players[socket.id]?.role,
+      action, 
+      data 
+    });
+  });
+
   // Soumission d'un résultat
   socket.on('submitResult', ({ roomCode, role, result }) => {
     const game = games.get(roomCode);

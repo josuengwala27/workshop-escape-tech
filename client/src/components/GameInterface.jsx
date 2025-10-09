@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import BiostatRole from './roles/BiostatRole';
 import LogisticsRole from './roles/LogisticsRole';
 import HygieneRole from './roles/HygieneRole';
-import Observer from './Observer';
+import ObserverLive from './ObserverLive';
 import Timer from './Timer';
 import '../styles/GameInterface.css';
 
-function GameInterface({ role, gameData, timeRemaining, currentTurn, completedTurns, onSubmitResult, onSubmitFinalCode }) {
+function GameInterface({ role, gameData, timeRemaining, currentTurn, completedTurns, onSubmitResult, onSubmitFinalCode, roomCode }) {
   const [myCoopCode, setMyCoopCode] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
   const [finalCode, setFinalCode] = useState('');
@@ -67,9 +67,9 @@ function GameInterface({ role, gameData, timeRemaining, currentTurn, completedTu
 
       <div className="game-content">
         {!isMyTurn && !allTurnsComplete ? (
-          <Observer 
+          <ObserverLive 
             currentTurn={currentTurn} 
-            myRole={role}
+            gameData={gameData}
             completedTurns={completedTurns}
           />
         ) : (
@@ -79,6 +79,7 @@ function GameInterface({ role, gameData, timeRemaining, currentTurn, completedTu
                 data={gameData.biostat}
                 onComplete={handleRoleComplete}
                 isCompleted={isCompleted}
+                roomCode={roomCode}
               />
             )}
 
@@ -88,6 +89,7 @@ function GameInterface({ role, gameData, timeRemaining, currentTurn, completedTu
                 onComplete={handleRoleComplete}
                 isCompleted={isCompleted}
                 selectedLot={sharedData.biostat?.selectedLot}
+                roomCode={roomCode}
               />
             )}
 
@@ -96,6 +98,7 @@ function GameInterface({ role, gameData, timeRemaining, currentTurn, completedTu
                 data={gameData.hygiene}
                 onComplete={handleRoleComplete}
                 isCompleted={isCompleted}
+                roomCode={roomCode}
               />
             )}
           </>

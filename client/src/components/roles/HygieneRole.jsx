@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/HygieneRole.css';
 
-function HygieneRole({ data, onComplete, isCompleted }) {
+function HygieneRole({ data, onComplete, isCompleted, roomCode }) {
   const [orderedSteps, setOrderedSteps] = useState([]);
   const [availableSteps, setAvailableSteps] = useState([...data.steps]);
   const [errors, setErrors] = useState(0);
+
+  // Partager les actions en temps réel
+  const shareAction = (action, actionData) => {
+    const socket = window.socket;
+    if (socket && roomCode) {
+      socket.emit('shareAction', { roomCode, action, data: actionData });
+    }
+  };
+
+  useEffect(() => {
+    shareAction('updateSteps', { orderedSteps: orderedSteps.map(s => s.id) });
+  }, [orderedSteps]);
 
   const handleSelectStep = (step) => {
     setOrderedSteps([...orderedSteps, step]);
